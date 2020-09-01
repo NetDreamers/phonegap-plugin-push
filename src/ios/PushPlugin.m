@@ -477,6 +477,10 @@
         }
 
         [message setObject:additionalData forKey:@"additionalData"];
+        
+        NSDictionary *userInfo = @{@"message":message};
+        NSNotification *n = [NSNotification notificationWithName:@"PushNotification" object:self userInfo:userInfo];
+        [[NSNotificationCenter defaultCenter] postNotification:n];
 
         // send notification message
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:message];
